@@ -55,7 +55,6 @@ var HelloWorldLayer = cc.Layer.extend({
         // });
         // this.addChild(this.sprite, 0);
         this.addSprite3D();
-        this.addMenu();
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
             onTouchesEnded: this.onTouchesEnded.bind(this),
@@ -107,14 +106,14 @@ var HelloWorldLayer = cc.Layer.extend({
         // cc.Camera.getDefaultCamera().setPosition3D(cam_pos);
 
         // var model = res.tortoise_c3b;
-        var model = res.spider;
+        var model = res.tortoise_c3b;
 
         for (var i = 0; i < this._spriteNum; i++) {
             this._elapseTransTimes.push(0);
             var sprite = new jsb.Sprite3D(model);
-            sprite.setTexture("res/zhizhu_01.png");
+            sprite.setTexture("res/tortoise.png");
             sprite.setRotation3D(cc.math.vec3(90, 26, 0));
-            var scale = 30 * ((0.5 * (i%3) + 1));
+            var scale = 0.2 * ((0.5 * (i%3) + 1));
             sprite.setScale(scale);
             var s = cc.winSize;
             sprite.setPosition(cc.p((i+1) * s.width / 6, (i + 1 ) * s.height / 6));
@@ -131,19 +130,18 @@ var HelloWorldLayer = cc.Layer.extend({
             var animation = new jsb.Animation3D(model);
 
             if(animation){
-                // var animate = new jsb.Animate3D(animation, 0, 1.933);
-                var animate = new jsb.Animate3D(animation, 0, 1);
-                // var animate = new jsb.Animate3D(animation, 5.24, 1.8);
+                var animate = new jsb.Animate3D(animation, 0, 1.933);
+    
                 this._swims.push(new cc.RepeatForever(animate));
                 sprite.runAction(this._swims[i]);
 
                 this._swims[i].retain();
                 // this._hurt = new jsb.Animate3D(animation, 1.933, 2.8);
                 // this._hurt = new jsb.Animate3D(animation, 13.1, 17.2);
-                this._hurts.push(new jsb.Animate3D(animation, 5.24, 1.8));
+                this._hurts.push(new jsb.Animate3D(animation, 1.933, 2.8));
                 this._hurts[i].retain();
 
-                this._turn_arounds.push(new jsb.Animate3D(animation, 2.84, 1.6));
+                this._turn_arounds.push(new jsb.Animate3D(animation, 2.84, 4));
                 // this._turn_around = new jsb.Animate3D(animation, 2.84, 4);
                 this._turn_arounds[i].retain();
 
